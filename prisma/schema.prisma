@@ -14,7 +14,7 @@ model Produto {
   descricao   String?
   preco       Float
   categoria   String   @default("pronta")
-  imagem      String?
+  imagemUrl   String?
   materiais   String[]
   dimensoes   String?
   createdAt   DateTime @default(now())

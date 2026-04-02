@@ -77,7 +77,7 @@ export const ProdutoScalarFieldEnum = {
   descricao: 'descricao',
   preco: 'preco',
   categoria: 'categoria',
-  imagem: 'imagem',
+  imagemUrl: 'imagemUrl',
   materiais: 'materiais',
   dimensoes: 'dimensoes',
   createdAt: 'createdAt',

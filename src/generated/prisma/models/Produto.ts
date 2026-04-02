@@ -42,7 +42,7 @@ export type ProdutoMinAggregateOutputType = {
   descricao: string | null
   preco: number | null
   categoria: string | null
-  imagem: string | null
+  imagemUrl: string | null
   dimensoes: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,7 +54,7 @@ export type ProdutoMaxAggregateOutputType = {
   descricao: string | null
   preco: number | null
   categoria: string | null
-  imagem: string | null
+  imagemUrl: string | null
   dimensoes: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -66,7 +66,7 @@ export type ProdutoCountAggregateOutputType = {
   descricao: number
   preco: number
   categoria: number
-  imagem: number
+  imagemUrl: number
   materiais: number
   dimensoes: number
   createdAt: number
@@ -91,7 +91,7 @@ export type ProdutoMinAggregateInputType = {
   descricao?: true
   preco?: true
   categoria?: true
-  imagem?: true
+  imagemUrl?: true
   dimensoes?: true
   createdAt?: true
   updatedAt?: true
@@ -103,7 +103,7 @@ export type ProdutoMaxAggregateInputType = {
   descricao?: true
   preco?: true
   categoria?: true
-  imagem?: true
+  imagemUrl?: true
   dimensoes?: true
   createdAt?: true
   updatedAt?: true
@@ -115,7 +115,7 @@ export type ProdutoCountAggregateInputType = {
   descricao?: true
   preco?: true
   categoria?: true
-  imagem?: true
+  imagemUrl?: true
   materiais?: true
   dimensoes?: true
   createdAt?: true
@@ -215,7 +215,7 @@ export type ProdutoGroupByOutputType = {
   descricao: string | null
   preco: number
   categoria: string
-  imagem: string | null
+  imagemUrl: string | null
   materiais: string[]
   dimensoes: string | null
   createdAt: Date
@@ -251,7 +251,7 @@ export type ProdutoWhereInput = {
   descricao?: Prisma.StringNullableFilter<"Produto"> | string | null
   preco?: Prisma.FloatFilter<"Produto"> | number
   categoria?: Prisma.StringFilter<"Produto"> | string
-  imagem?: Prisma.StringNullableFilter<"Produto"> | string | null
+  imagemUrl?: Prisma.StringNullableFilter<"Produto"> | string | null
   materiais?: Prisma.StringNullableListFilter<"Produto">
   dimensoes?: Prisma.StringNullableFilter<"Produto"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Produto"> | Date | string
@@ -264,7 +264,7 @@ export type ProdutoOrderByWithRelationInput = {
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   preco?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
-  imagem?: Prisma.SortOrderInput | Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   materiais?: Prisma.SortOrder
   dimensoes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -280,7 +280,7 @@ export type ProdutoWhereUniqueInput = Prisma.AtLeast<{
   descricao?: Prisma.StringNullableFilter<"Produto"> | string | null
   preco?: Prisma.FloatFilter<"Produto"> | number
   categoria?: Prisma.StringFilter<"Produto"> | string
-  imagem?: Prisma.StringNullableFilter<"Produto"> | string | null
+  imagemUrl?: Prisma.StringNullableFilter<"Produto"> | string | null
   materiais?: Prisma.StringNullableListFilter<"Produto">
   dimensoes?: Prisma.StringNullableFilter<"Produto"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Produto"> | Date | string
@@ -293,7 +293,7 @@ export type ProdutoOrderByWithAggregationInput = {
   descricao?: Prisma.SortOrderInput | Prisma.SortOrder
   preco?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
-  imagem?: Prisma.SortOrderInput | Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   materiais?: Prisma.SortOrder
   dimensoes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -314,7 +314,7 @@ export type ProdutoScalarWhereWithAggregatesInput = {
   descricao?: Prisma.StringNullableWithAggregatesFilter<"Produto"> | string | null
   preco?: Prisma.FloatWithAggregatesFilter<"Produto"> | number
   categoria?: Prisma.StringWithAggregatesFilter<"Produto"> | string
-  imagem?: Prisma.StringNullableWithAggregatesFilter<"Produto"> | string | null
+  imagemUrl?: Prisma.StringNullableWithAggregatesFilter<"Produto"> | string | null
   materiais?: Prisma.StringNullableListFilter<"Produto">
   dimensoes?: Prisma.StringNullableWithAggregatesFilter<"Produto"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Produto"> | Date | string
@@ -326,7 +326,7 @@ export type ProdutoCreateInput = {
   descricao?: string | null
   preco: number
   categoria?: string
-  imagem?: string | null
+  imagemUrl?: string | null
   materiais?: Prisma.ProdutoCreatemateriaisInput | string[]
   dimensoes?: string | null
   createdAt?: Date | string
@@ -339,7 +339,7 @@ export type ProdutoUncheckedCreateInput = {
   descricao?: string | null
   preco: number
   categoria?: string
-  imagem?: string | null
+  imagemUrl?: string | null
   materiais?: Prisma.ProdutoCreatemateriaisInput | string[]
   dimensoes?: string | null
   createdAt?: Date | string
@@ -351,7 +351,7 @@ export type ProdutoUpdateInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   categoria?: Prisma.StringFieldUpdateOperationsInput | string
-  imagem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   materiais?: Prisma.ProdutoUpdatemateriaisInput | string[]
   dimensoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -364,7 +364,7 @@ export type ProdutoUncheckedUpdateInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   categoria?: Prisma.StringFieldUpdateOperationsInput | string
-  imagem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   materiais?: Prisma.ProdutoUpdatemateriaisInput | string[]
   dimensoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -377,7 +377,7 @@ export type ProdutoCreateManyInput = {
   descricao?: string | null
   preco: number
   categoria?: string
-  imagem?: string | null
+  imagemUrl?: string | null
   materiais?: Prisma.ProdutoCreatemateriaisInput | string[]
   dimensoes?: string | null
   createdAt?: Date | string
@@ -389,7 +389,7 @@ export type ProdutoUpdateManyMutationInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   categoria?: Prisma.StringFieldUpdateOperationsInput | string
-  imagem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   materiais?: Prisma.ProdutoUpdatemateriaisInput | string[]
   dimensoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -402,7 +402,7 @@ export type ProdutoUncheckedUpdateManyInput = {
   descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preco?: Prisma.FloatFieldUpdateOperationsInput | number
   categoria?: Prisma.StringFieldUpdateOperationsInput | string
-  imagem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  imagemUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   materiais?: Prisma.ProdutoUpdatemateriaisInput | string[]
   dimensoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -423,7 +423,7 @@ export type ProdutoCountOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   preco?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
-  imagem?: Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrder
   materiais?: Prisma.SortOrder
   dimensoes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -441,7 +441,7 @@ export type ProdutoMaxOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   preco?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
-  imagem?: Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrder
   dimensoes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -453,7 +453,7 @@ export type ProdutoMinOrderByAggregateInput = {
   descricao?: Prisma.SortOrder
   preco?: Prisma.SortOrder
   categoria?: Prisma.SortOrder
-  imagem?: Prisma.SortOrder
+  imagemUrl?: Prisma.SortOrder
   dimensoes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -509,7 +509,7 @@ export type ProdutoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   descricao?: boolean
   preco?: boolean
   categoria?: boolean
-  imagem?: boolean
+  imagemUrl?: boolean
   materiais?: boolean
   dimensoes?: boolean
   createdAt?: boolean
@@ -522,7 +522,7 @@ export type ProdutoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   descricao?: boolean
   preco?: boolean
   categoria?: boolean
-  imagem?: boolean
+  imagemUrl?: boolean
   materiais?: boolean
   dimensoes?: boolean
   createdAt?: boolean
@@ -535,7 +535,7 @@ export type ProdutoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   descricao?: boolean
   preco?: boolean
   categoria?: boolean
-  imagem?: boolean
+  imagemUrl?: boolean
   materiais?: boolean
   dimensoes?: boolean
   createdAt?: boolean
@@ -548,14 +548,14 @@ export type ProdutoSelectScalar = {
   descricao?: boolean
   preco?: boolean
   categoria?: boolean
-  imagem?: boolean
+  imagemUrl?: boolean
   materiais?: boolean
   dimensoes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "descricao" | "preco" | "categoria" | "imagem" | "materiais" | "dimensoes" | "createdAt" | "updatedAt", ExtArgs["result"]["produto"]>
+export type ProdutoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "descricao" | "preco" | "categoria" | "imagemUrl" | "materiais" | "dimensoes" | "createdAt" | "updatedAt", ExtArgs["result"]["produto"]>
 
 export type $ProdutoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Produto"
@@ -566,7 +566,7 @@ export type $ProdutoPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     descricao: string | null
     preco: number
     categoria: string
-    imagem: string | null
+    imagemUrl: string | null
     materiais: string[]
     dimensoes: string | null
     createdAt: Date
@@ -999,7 +999,7 @@ export interface ProdutoFieldRefs {
   readonly descricao: Prisma.FieldRef<"Produto", 'String'>
   readonly preco: Prisma.FieldRef<"Produto", 'Float'>
   readonly categoria: Prisma.FieldRef<"Produto", 'String'>
-  readonly imagem: Prisma.FieldRef<"Produto", 'String'>
+  readonly imagemUrl: Prisma.FieldRef<"Produto", 'String'>
   readonly materiais: Prisma.FieldRef<"Produto", 'String[]'>
   readonly dimensoes: Prisma.FieldRef<"Produto", 'String'>
   readonly createdAt: Prisma.FieldRef<"Produto", 'DateTime'>

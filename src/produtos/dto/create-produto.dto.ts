@@ -17,10 +17,11 @@ export class CreateProdutoDto {
 
   @IsOptional()
   @IsString()
-  imagem?: string;
+  imagemUrl?: string;
 
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   materiais?: string[];
 
   @IsOptional()

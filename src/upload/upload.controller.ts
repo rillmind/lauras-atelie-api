@@ -32,9 +32,10 @@ export class UploadController {
       throw new BadRequestException("Buffer do arquivo não disponível");
     }
 
-    const fileName = `${Date.now()}-${file.originalname.replace(/\s/g, "-")}`;
-
     try {
+      const fileName = `${Date.now()}-${file.originalname.replace(/\s/g, "-")}`;
+      console.log("Nome do arquivo:", fileName);
+
       const { data, error } = await supabase.storage
         .from("product-icons")
         .upload(fileName, file.buffer, {
@@ -48,17 +49,32 @@ export class UploadController {
       }
 
       console.log("Upload realizado com sucesso:", data);
+      console.log("Path retornado:", data.path);
+      console.log("Full path:", data.fullPath);
 
-      // Usar o path completo retornado pelo upload
-      const filePath = data?.fullPath || data?.path || fileName;
-      console.log("Path do arquivo:", filePath);
-
+      // Tentar criar URL assinada com o path correto
       const { data: urlData, error: urlError } = await supabase.storage
         .from("product-icons")
-        .createSignedUrl(filePath, 60 * 60 * 24 * 365);
+        .createSignedUrl(data.path, 60 * 60 * 24 * 365, {
+          transform: {
+            width: 800,
+            height: 800,
+            resize: "contain",
+          },
+        });
 
       if (urlError) {
         console.error("Erro ao gerar URL assinada:", urlError);
+        // Fallback: usar URL pública se bucket for público
+        const { data: publicUrl } = supabase.storage
+          .from("product-icons")
+          .getPublicUrl(data.path);
+        
+        if (publicUrl?.publicUrl) {
+          console.log("Usando URL pública:", publicUrl.publicUrl);
+          return { imagemUrl: publicUrl.publicUrl };
+        }
+        
         throw new BadRequestException(`Erro ao gerar URL: ${urlError.message}`);
       }
 

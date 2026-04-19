@@ -3,6 +3,13 @@ import { PrismaService } from "../prisma/prisma.service";
 import { CreateProdutoDto } from "./dto/create-produto.dto";
 import { UpdateProdutoDto } from "./dto/update-produto.dto";
 
+function extractFilename(url: string | null): string | null {
+  if (!url) return null;
+  if (!url.includes("supabase.co")) return url;
+  const match = url.match(/product-icons\/([^?]+)/);
+  return match ? match[1].split("?")[0] : null;
+}
+
 @Injectable()
 export class ProdutosService {
   constructor(private prisma: PrismaService) {}
@@ -11,14 +18,21 @@ export class ProdutosService {
     return this.prisma.produto.create({ data: dto });
   }
 
-  findAll() {
-    return this.prisma.produto.findMany();
+  async findAll() {
+    const produtos = await this.prisma.produto.findMany();
+    return produtos.map((p) => ({
+      ...p,
+      imagemUrl: p.imagemUrl ? extractFilename(p.imagemUrl) : null,
+    }));
   }
 
   async findOne(id: number) {
     const produto = await this.prisma.produto.findUnique({ where: { id } });
     if (!produto) throw new NotFoundException(`Produto #${id} não encontrado`);
-    return produto;
+    return {
+      ...produto,
+      imagemUrl: produto.imagemUrl ? extractFilename(produto.imagemUrl) : null,
+    };
   }
 
   async update(id: number, dto: UpdateProdutoDto) {

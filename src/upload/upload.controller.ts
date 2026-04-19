@@ -50,36 +50,14 @@ export class UploadController {
 
       console.log("Upload realizado com sucesso:", data);
       console.log("Path retornado:", data.path);
-      console.log("Full path:", data.fullPath);
 
-      // Tentar criar URL assinada com o path correto
-      const { data: urlData, error: urlError } = await supabase.storage
+      // Bucket é público, usar URL pública direta
+      const { data: urlData } = supabase.storage
         .from("product-icons")
-        .createSignedUrl(data.path, 60 * 60 * 24 * 365, {
-          transform: {
-            width: 800,
-            height: 800,
-            resize: "contain",
-          },
-        });
+        .getPublicUrl(data.path);
 
-      if (urlError) {
-        console.error("Erro ao gerar URL assinada:", urlError);
-        // Fallback: usar URL pública se bucket for público
-        const { data: publicUrl } = supabase.storage
-          .from("product-icons")
-          .getPublicUrl(data.path);
-        
-        if (publicUrl?.publicUrl) {
-          console.log("Usando URL pública:", publicUrl.publicUrl);
-          return { imagemUrl: publicUrl.publicUrl };
-        }
-        
-        throw new BadRequestException(`Erro ao gerar URL: ${urlError.message}`);
-      }
-
-      console.log("URL assinada gerada:", urlData.signedUrl);
-      return { imagemUrl: urlData.signedUrl };
+      console.log("URL pública gerada:", urlData.publicUrl);
+      return { imagemUrl: data.path };
     } catch (error: any) {
       console.error("Erro no upload:", error.message);
       throw error;

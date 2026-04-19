@@ -3,6 +3,7 @@ import { ProdutosModule } from './produtos/produtos.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UploadModule } from './upload/upload.module';
+import { ImagemModule } from './imagem/imagem.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -13,6 +14,7 @@ import { extname } from 'path';
     ProdutosModule,
     UsuariosModule,
     UploadModule,
+    ImagemModule,
     MulterModule.register({
       storage: diskStorage({
         destination: './uploads',
